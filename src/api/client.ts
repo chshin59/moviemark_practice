@@ -42,7 +42,7 @@ async function client<T>(
 	try {
 		const response = await fetch(url, config);
 
-		// 403 에러 처리
+		// 토큰이 이상할 때 403 에러 처리
 		if (response.status === 403) {
 			removeCookie("accessToken");
 			removeCookie("refreshToken");
