@@ -16,7 +16,10 @@ const MovieBookmark = memo(({
 	const { addBookmark, deleteBookmark } = useBookmark();
 	const [bookmarked, setBookmarked] = useState<boolean>(isBookmarked);
 
-	const handleBookmark = useCallback(async () => {
+	const handleBookmark = useCallback(async (e: React.MouseEvent) => {
+		e.preventDefault(); // Link의 기본 동작 방지
+		e.stopPropagation(); // 이벤트 버블링 방지
+
 		setBookmarked(!bookmarked);
 		if (!bookmarked) await addBookmark(String(movieId));
 		else await deleteBookmark(String(movieId));

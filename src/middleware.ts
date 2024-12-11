@@ -25,7 +25,7 @@ export function middleware(request: NextRequest) {
 
 	// 이미 로그인된 상태에서 로그인/회원가입 페이지 접근 시
 	if ((pathname === "/login" || pathname === "/signup") && accessToken) {
-		return NextResponse.redirect(new URL("/", request.url));
+		return NextResponse.redirect(new URL("/movies", request.url));
 	}
 
 	return NextResponse.next();

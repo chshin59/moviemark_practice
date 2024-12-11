@@ -42,6 +42,14 @@ async function client<T>(
 	try {
 		const response = await fetch(url, config);
 
+		// 403 에러 처리
+		if (response.status === 403) {
+			removeCookie("accessToken");
+			removeCookie("refreshToken");
+			window.location.href = "/login"; // 로그인 페이지로 리다이렉트
+			throw new Error("접근 권한이 없습니다. 다시 로그인해주세요.");
+		}
+
 		// 토큰 갱신이 필요한 경우 (401 에러)
 		if (response.status === 401 && refreshToken) {
 			try {
